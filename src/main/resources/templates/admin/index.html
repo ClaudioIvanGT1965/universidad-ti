@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Administración</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal de Administración</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Gestión académica
+            </p>
+
+            <h2>Administración Académica</h2>
+
+            <p>
+                Gestiona estudiantes, cursos,
+                secciones y calificaciones
+                de Universidad TI.
+            </p>
+
+        </section>
+
+
+        <section class="menu-admin">
+
+
+            <!-- ESTUDIANTES -->
+
+            <a class="tarjeta-admin" th:href="@{/admin/estudiantes}">
+
+                <div class="icono">
+                    👥
+                </div>
+
+                <h3>Estudiantes</h3>
+
+                <p>
+                    Registrar, consultar y
+                    administrar estudiantes.
+                </p>
+
+                <span class="accion">
+                    Administrar →
+                </span>
+
+            </a>
+
+
+            <!-- CURSOS -->
+
+            <a class="tarjeta-admin" th:href="@{/admin/cursos}">
+
+                <div class="icono">
+                    📚
+                </div>
+
+                <h3>Cursos</h3>
+
+                <p>
+                    Gestionar el catálogo
+                    académico de cursos.
+                </p>
+
+                <span class="accion">
+                    Administrar →
+                </span>
+
+            </a>
+
+
+            <!-- SECCIONES -->
+
+            <a class="tarjeta-admin" th:href="@{/admin/secciones}">
+
+                <div class="icono">
+                    🗂️
+                </div>
+
+                <h3>Secciones</h3>
+
+                <p>
+                    Crear y administrar las
+                    secciones académicas.
+                </p>
+
+                <span class="accion">
+                    Administrar →
+                </span>
+
+            </a>
+
+
+            <!-- NOTAS -->
+
+            <a class="tarjeta-admin" th:href="@{/admin/notas}">
+
+                <div class="icono">
+                    📝
+                </div>
+
+                <h3>Notas</h3>
+
+                <p>
+                    Registrar evaluaciones y
+                    calificaciones.
+                </p>
+
+                <span class="accion">
+                    Registrar →
+                </span>
+
+            </a>
+
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

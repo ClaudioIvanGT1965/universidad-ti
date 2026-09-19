@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Inscripción de Asignaturas</title>
+
+    <link rel="stylesheet" th:href="@{/css/estudiante.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal del Estudiante</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-navegacion">
+
+            <a th:href="@{/estudiante}" class="btn-volver">
+                ← Volver al inicio
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Proceso académico
+            </p>
+
+            <h2>Inscripción de asignaturas</h2>
+
+            <p>
+                Selecciona una sección disponible
+                para incorporarla a tu carga académica.
+            </p>
+
+        </section>
+
+
+        <!-- MENSAJE DE ÉXITO -->
+
+        <div th:if="${mensaje}" class="mensaje-exito" th:text="${mensaje}">
+        </div>
+
+
+        <!-- MENSAJE DE ERROR -->
+
+        <div th:if="${error}" class="mensaje-error" th:text="${error}">
+        </div>
+
+
+        <!-- NO HAY SECCIONES -->
+
+        <div th:if="${#lists.isEmpty(secciones)}" class="sin-datos">
+
+            No existen secciones disponibles
+            para inscripción en este momento.
+
+        </div>
+
+
+        <!-- TABLA DE SECCIONES -->
+
+        <section th:unless="${#lists.isEmpty(secciones)}" class="panel-tabla">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Código</th>
+                        <th>Asignatura</th>
+                        <th>Período</th>
+                        <th>Módulo</th>
+                        <th>Inicio</th>
+                        <th>Término</th>
+                        <th>Cupos</th>
+                        <th>Acción</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="seccion : ${secciones}">
+
+                        <td>
+                            <strong th:text="${seccion.codigoCurso}">
+                                JEE-0101
+                            </strong>
+                        </td>
+
+                        <td th:text="${seccion.nombreCurso}">
+                            JAVA EE
+                        </td>
+
+                        <td th:text="${seccion.periodo}">
+                            2026
+                        </td>
+
+                        <td th:text="${seccion.modulo}">
+                            01
+                        </td>
+
+                        <td th:text="${#temporals.format(
+                                    seccion.fechaIni,
+                                    'dd-MM-yyyy')}">
+                            10-03-2026
+                        </td>
+
+                        <td th:text="${#temporals.format(
+                                    seccion.fechaTer,
+                                    'dd-MM-yyyy')}">
+                            10-07-2026
+                        </td>
+
+                        <td>
+                            <span class="cupos" th:text="${seccion.cuposDisponibles}">
+                                10
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <form th:action="@{/estudiante/inscripcion/{id}
+                                (id=${seccion.idSeccion})}" method="post">
+
+                                <button type="submit" class="btn-inscribir">
+                                    Inscribirme
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

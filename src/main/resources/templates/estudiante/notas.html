@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Mis Notas</title>
+
+    <link rel="stylesheet" th:href="@{/css/estudiante.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal del Estudiante</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-navegacion">
+
+            <a th:href="@{/estudiante}" class="btn-volver">
+                ← Volver al inicio
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Rendimiento académico
+            </p>
+
+            <h2>Mis notas</h2>
+
+            <p>
+                Consulta las evaluaciones registradas
+                en tus cursos.
+            </p>
+
+        </section>
+
+
+        <div th:if="${#lists.isEmpty(cursos)}" class="sin-datos">
+
+            Actualmente no tienes cursos
+            con información académica.
+
+        </div>
+
+
+        <section th:each="curso : ${cursos}" class="curso-notas">
+
+            <div class="curso-encabezado">
+
+                <div>
+
+                    <span class="codigo-curso" th:text="${curso.codigoCurso}">
+                        JEE-0101
+                    </span>
+
+                    <h3 th:text="${curso.nombreCurso}">
+                        JAVA EE
+                    </h3>
+
+                    <span>
+                        Período
+                        <strong th:text="${curso.periodo}">
+                            2026
+                        </strong>
+
+                        · Módulo
+                        <strong th:text="${curso.modulo}">
+                            01
+                        </strong>
+                    </span>
+
+                </div>
+
+
+                <div class="promedio-curso">
+
+                    <span>Promedio</span>
+
+                    <strong th:if="${curso.promedio != null
+                                and curso.promedio > 0}" th:text="${curso.promedio}">
+                        5.63
+                    </strong>
+
+                    <strong th:unless="${curso.promedio != null
+                                    and curso.promedio > 0}" class="promedio-pendiente">
+                        Pendiente
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div th:if="${#lists.isEmpty(curso.notas)}" class="sin-notas">
+
+                Aún no existen notas registradas
+                para este curso.
+
+            </div>
+
+
+            <div th:unless="${#lists.isEmpty(curso.notas)}" class="tabla-notas">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>N°</th>
+                            <th>Evaluación</th>
+                            <th>Fecha</th>
+                            <th>Ponderación</th>
+                            <th>Nota</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr th:each="nota : ${curso.notas}">
+
+                            <td th:text="${nota.numeroNota}">
+                                1
+                            </td>
+
+                            <td th:text="${nota.titulo}">
+                                Prueba 1
+                            </td>
+
+                            <td th:text="${#temporals.format(
+                                    nota.fecha,
+                                    'dd-MM-yyyy')}">
+                                10-09-2026
+                            </td>
+
+                            <td>
+                                <span th:text="${nota.ponderacion}">
+                                    30
+                                </span>%
+                            </td>
+
+                            <td>
+                                <strong th:text="${nota.nota}">
+                                    5.5
+                                </strong>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

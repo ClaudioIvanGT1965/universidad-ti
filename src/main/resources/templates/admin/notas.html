@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Gestión de Notas</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal de Administración</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-superior">
+
+            <a th:href="@{/admin}" class="btn-volver">
+                ← Volver al inicio
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Gestión académica
+            </p>
+
+            <h2>Gestión de Notas</h2>
+
+            <p>
+                Selecciona una sección para consultar
+                sus estudiantes y registrar evaluaciones.
+            </p>
+
+        </section>
+
+
+        <div th:if="${#lists.isEmpty(secciones)}" class="sin-datos">
+
+            No existen secciones registradas.
+
+        </div>
+
+
+        <section th:unless="${#lists.isEmpty(secciones)}" class="panel-tabla">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Nombre</th>
+                        <th>Período</th>
+                        <th>Módulo</th>
+                        <th>Evaluaciones</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="seccion : ${secciones}">
+
+                        <td>
+                            <strong th:text="${seccion.curso.codigo}">
+                                JEE-0101
+                            </strong>
+                        </td>
+
+                        <td th:text="${seccion.curso.nombre}">
+                            Java Enterprise
+                        </td>
+
+                        <td th:text="${seccion.periodo}">
+                            2026
+                        </td>
+
+                        <td th:text="${seccion.modulo}">
+                            01
+                        </td>
+
+                        <td th:text="${seccion.totalNotas}">
+                            3
+                        </td>
+
+                        <td>
+
+                            <a th:href="@{/admin/notas/seccion/{id}
+                                    (id=${seccion.id})}" class="btn-nuevo">
+
+                                Gestionar notas
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI | Acceso institucional</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            background:
+                radial-gradient(circle at top left,
+                    #174a7e 0%,
+                    transparent 45%),
+                linear-gradient(135deg,
+                    #071b33,
+                    #102e50);
+
+            padding: 24px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .brand {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .brand h1 {
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .brand p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #c8d9ec;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .login-card {
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            padding: 42px 38px;
+
+            box-shadow:
+                0 24px 65px rgba(0, 0, 0, 0.28);
+        }
+
+        .login-card h2 {
+            margin: 0 0 8px;
+
+            color: #102e50;
+
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            margin-bottom: 30px;
+
+            color: #718096;
+
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 9px;
+
+            color: #334155;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border: 1px solid #d5deea;
+
+            border-radius: 8px;
+
+            background: #f8fafc;
+
+            color: #102e50;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+
+            border-color: #2684d9;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px rgba(38, 132, 217, 0.12);
+        }
+
+        .btn-login {
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(135deg,
+                    #1479c9,
+                    #0d5598);
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .btn-login:hover {
+            background:
+                linear-gradient(135deg,
+                    #0f69b2,
+                    #083f77);
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 18px rgba(13, 85, 152, 0.25);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .alert {
+            padding: 13px 15px;
+
+            margin-bottom: 22px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+        .alert-error {
+            background: #fff1f2;
+
+            color: #be123c;
+
+            border: 1px solid #fecdd3;
+        }
+
+        .alert-success {
+            background: #ecfdf5;
+
+            color: #047857;
+
+            border: 1px solid #a7f3d0;
+        }
+
+        .footer {
+            margin-top: 28px;
+
+            text-align: center;
+
+            color: #a9bfd6;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        @media (max-width: 480px) {
+
+            .login-card {
+                padding: 32px 24px;
+            }
+
+            .brand h1 {
+                font-size: 29px;
+            }
+
+            .login-card h2 {
+                font-size: 23px;
+            }
+        }
+
+        /* =====================================
+   ACCESO A DATOS DE PRUEBA
+   ===================================== */
+
+        .datos-prueba {
+            position: fixed;
+
+            right: 22px;
+            bottom: 20px;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 10px 15px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            border-radius: 30px;
+
+            color: #dcecff;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            text-decoration: none;
+
+            transition: 0.2s;
+        }
+
+        .datos-prueba:hover {
+            background: rgba(255, 255, 255, 0.22);
+
+            color: white;
+        }
+
+        .datos-icono {
+            font-size: 19px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <!-- IDENTIDAD INSTITUCIONAL -->
+
+        <header class="brand">
+
+            <h1>Universidad TI</h1>
+
+            <p>Plataforma Académica</p>
+
+        </header>
+
+
+        <!-- TARJETA DE ACCESO -->
+
+        <section class="login-card">
+
+            <h2>Bienvenido</h2>
+
+            <p class="subtitle">
+                Ingresa tus credenciales para acceder
+                a la plataforma académica.
+            </p>
+
+
+            <!-- MENSAJE DE ERROR -->
+
+            <div th:if="${param.error}" class="alert alert-error" role="alert">
+
+                Correo electrónico o contraseña incorrectos.
+
+            </div>
+
+
+            <!-- MENSAJE DE CIERRE DE SESIÓN -->
+
+            <div th:if="${param.logout}" class="alert alert-success" role="status">
+
+                Sesión cerrada correctamente.
+
+            </div>
+
+
+            <!-- FORMULARIO SPRING SECURITY -->
+
+            <form th:action="@{/login}" method="post">
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Correo electrónico
+                    </label>
+
+                    <input type="email" id="username" name="username" placeholder="nombre@universidad.cl"
+                        autocomplete="username" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña"
+                        autocomplete="current-password" required>
+
+                </div>
+
+
+                <button type="submit" class="btn-login">
+
+                    Ingresar a la plataforma
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- PIE DE PÁGINA -->
+
+        <footer class="footer">
+
+            Universidad TI<br>
+
+            Sistema de Gestión Académica
+
+        </footer>
+
+    </main>
+    <!-- ACCESO A DATOS DE PRUEBA -->
+
+    <a th:href="@{/usuarios-prueba.html}" class="datos-prueba" onclick="window.open(
+       this.href,
+       'UsuariosPrueba',
+       'width=650,height=500,scrollbars=yes,resizable=yes'
+   ); return false;" title="Ver usuarios para pruebas">
+
+        <span class="datos-icono">ⓘ</span>
+
+        <span>Datos de prueba</span>
+
+    </a>
+</body>
+
+</html>

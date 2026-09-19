@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Nueva Sección</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal de Administración</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-superior">
+
+            <a th:href="@{/admin/secciones}" class="btn-volver">
+                ← Volver a secciones
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Gestión académica
+            </p>
+
+            <h2>Nueva sección</h2>
+
+            <p>
+                Crea una nueva sección para
+                un curso vigente.
+            </p>
+
+        </section>
+
+
+        <div th:if="${error}" class="mensaje-error" th:text="${error}">
+        </div>
+
+
+        <section class="panel-formulario">
+
+            <form th:action="@{/admin/secciones/nueva}" th:object="${seccion}" method="post">
+
+
+                <div class="campo">
+
+                    <label for="codigoCurso">
+                        Curso
+                    </label>
+
+                    <select id="codigoCurso" th:field="*{codigoCurso}" required>
+
+                        <option value="">
+                            -- Seleccione un curso --
+                        </option>
+
+                        <option th:each="curso : ${cursos}" th:value="${curso.codigo}"
+                            th:text="|${curso.codigo} - ${curso.nombre}|">
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="periodo">
+                        Período
+                    </label>
+
+                    <input type="number" id="periodo" th:field="*{periodo}" placeholder="Ej: 2027" min="2000" required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="modulo">
+                        Módulo
+                    </label>
+
+                    <input type="text" id="modulo" th:field="*{modulo}" placeholder="Ej: 01" maxlength="3" required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="topeEstudiantes">
+                        Tope de estudiantes
+                    </label>
+
+                    <input type="number" id="topeEstudiantes" th:field="*{topeEstudiantes}" min="1" placeholder="Ej: 30"
+                        required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="totalNotas">
+                        Cantidad de evaluaciones
+                    </label>
+
+                    <input type="number" id="totalNotas" th:field="*{totalNotas}" min="1" placeholder="Ej: 3" required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="fechaIni">
+                        Fecha de inicio
+                    </label>
+
+                    <input type="date" id="fechaIni" th:field="*{fechaIni}" required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="fechaTer">
+                        Fecha de término
+                    </label>
+
+                    <input type="date" id="fechaTer" th:field="*{fechaTer}" required>
+
+                </div>
+
+
+                <div class="acciones-formulario">
+
+                    <a th:href="@{/admin/secciones}" class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn-guardar">
+                        Crear sección
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

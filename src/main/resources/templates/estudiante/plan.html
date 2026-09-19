@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Plan Curricular</title>
+
+    <link rel="stylesheet" th:href="@{/css/estudiante.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal del Estudiante</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-navegacion">
+
+            <a th:href="@{/estudiante}" class="btn-volver">
+                ← Volver al inicio
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Formación académica
+            </p>
+
+            <h2>Plan Curricular</h2>
+
+            <p>
+                Conoce las asignaturas que forman parte
+                del programa académico de Universidad TI.
+            </p>
+
+        </section>
+
+
+        <div th:if="${#lists.isEmpty(cursos)}" class="sin-datos">
+
+            Actualmente no existen asignaturas
+            vigentes en el plan curricular.
+
+        </div>
+
+
+        <section th:unless="${#lists.isEmpty(cursos)}" class="panel-tabla">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Código</th>
+                        <th>Asignatura</th>
+                        <th>Descripción</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="curso : ${cursos}">
+
+                        <td>
+                            <strong th:text="${curso.codigo}">
+                                JEE-0101
+                            </strong>
+                        </td>
+
+                        <td th:text="${curso.nombre}">
+                            JAVA EE
+                        </td>
+
+                        <td th:text="${curso.descripcion}">
+                            Desarrollo de aplicaciones
+                            empresariales con Java.
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

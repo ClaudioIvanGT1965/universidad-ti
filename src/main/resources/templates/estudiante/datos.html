@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Mis Datos</title>
+
+    <link rel="stylesheet" th:href="@{/css/estudiante.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal del Estudiante</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-navegacion">
+
+            <a th:href="@{/estudiante}" class="btn-volver">
+                ← Volver al inicio
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Información personal
+            </p>
+
+            <h2>Mis datos</h2>
+
+            <p>
+                Información registrada en
+                Universidad TI.
+            </p>
+
+        </section>
+
+
+        <section class="ficha-estudiante">
+
+            <div class="ficha-titulo">
+
+                <div class="avatar-estudiante">
+                    <span th:text="${#strings.substring(estudiante.nombre,0,1)}">
+                        J
+                    </span>
+                </div>
+
+                <div>
+
+                    <h3 th:text="${estudiante.nombre}">
+                        SEPULVEDA, JULIAN
+                    </h3>
+
+                    <span>Estudiante</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="datos-grid">
+
+                <div class="dato">
+
+                    <span class="dato-etiqueta">
+                        Nombre completo
+                    </span>
+
+                    <strong th:text="${estudiante.nombre}">
+                        SEPULVEDA, JULIAN
+                    </strong>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <span class="dato-etiqueta">
+                        Correo electrónico
+                    </span>
+
+                    <strong th:text="${estudiante.email}">
+                        julian@gmail.com
+                    </strong>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <span class="dato-etiqueta">
+                        Fecha de ingreso
+                    </span>
+
+                    <strong th:text="${#temporals.format(
+                                    estudiante.fechaIngreso,
+                                    'dd-MM-yyyy')}">
+                        16-09-2026
+                    </strong>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <span class="dato-etiqueta">
+                        Estado académico
+                    </span>
+
+                    <strong th:if="${estudiante.vigente}" class="estado-vigente">
+                        Vigente
+                    </strong>
+
+                    <strong th:unless="${estudiante.vigente}" class="estado-inactivo">
+                        No vigente
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

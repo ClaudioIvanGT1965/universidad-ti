@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Nuevo Curso</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal de Administración</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-superior">
+
+            <a th:href="@{/admin/cursos}" class="btn-volver">
+                ← Volver a cursos
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Gestión académica
+            </p>
+
+            <h2>Nuevo curso</h2>
+
+            <p>
+                Registra una nueva asignatura
+                en Universidad TI.
+            </p>
+
+        </section>
+
+
+        <div th:if="${error}" class="mensaje-error" th:text="${error}">
+        </div>
+
+
+        <section class="panel-formulario">
+
+            <form th:action="@{/admin/cursos/nuevo}" th:object="${curso}" method="post">
+
+
+                <div class="campo">
+
+                    <label for="codigo">
+                        Código
+                    </label>
+
+                    <input type="text" id="codigo" th:field="*{codigo}" placeholder="Ej: JEE-0201" required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="nombre">
+                        Nombre del curso
+                    </label>
+
+                    <input type="text" id="nombre" th:field="*{nombre}" placeholder="Ej: Desarrollo Web Avanzado"
+                        required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="descripcion">
+                        Descripción
+                    </label>
+
+                    <textarea id="descripcion" th:field="*{descripcion}" rows="5" placeholder="Descripción del curso..."
+                        required>
+                </textarea>
+
+                </div>
+
+
+                <div class="informacion-acceso">
+
+                    <strong>Estado inicial</strong>
+
+                    <p>
+                        El nuevo curso será registrado
+                        automáticamente como vigente.
+                    </p>
+
+                </div>
+
+
+                <div class="acciones-formulario">
+
+                    <a th:href="@{/admin/cursos}" class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn-guardar">
+                        Guardar curso
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

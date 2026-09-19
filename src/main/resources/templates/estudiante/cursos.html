@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Mis Cursos</title>
+
+    <link rel="stylesheet" th:href="@{/css/estudiante.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal del Estudiante</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-navegacion">
+
+            <a th:href="@{/estudiante}" class="btn-volver">
+                ← Volver al inicio
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Carga académica
+            </p>
+
+            <h2>Mis cursos</h2>
+
+            <p>
+                <span th:text="${estudiante.nombre}">
+                    Estudiante
+                </span>
+            </p>
+
+        </section>
+        <div th:if="${mensaje}" class="mensaje-exito" th:text="${mensaje}">
+        </div>
+
+        <div th:if="${error}" class="mensaje-error" th:text="${error}">
+        </div>
+
+        <section class="panel-tabla">
+
+            <div th:if="${#lists.isEmpty(inscripciones)}" class="sin-datos">
+
+                Actualmente no tienes cursos inscritos.
+
+            </div>
+
+
+            <table th:unless="${#lists.isEmpty(inscripciones)}">
+
+                <thead>
+
+                    <tr>
+                        <th>Código</th>
+                        <th>Curso</th>
+                        <th>Período</th>
+                        <th>Módulo</th>
+                        <th>Promedio</th>
+                        <th>Acción</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="inscripcion : ${inscripciones}">
+
+                        <td th:text="${inscripcion.seccion.curso.codigo}">
+                            JEE-0101
+                        </td>
+
+                        <td th:text="${inscripcion.seccion.curso.nombre}">
+                            JAVA EE
+                        </td>
+
+                        <td th:text="${inscripcion.seccion.periodo}">
+                            2026
+                        </td>
+
+                        <td th:text="${inscripcion.seccion.modulo}">
+                            01
+                        </td>
+
+                        <td>
+
+                            <span th:if="${inscripcion.promedio != null
+                                      and inscripcion.promedio > 0}" th:text="${inscripcion.promedio}">
+                                5.63
+                            </span>
+
+                            <span th:unless="${inscripcion.promedio != null
+                                          and inscripcion.promedio > 0}" class="pendiente">
+                                Pendiente
+                            </span>
+
+                        </td>
+                        <td>
+
+                            <form th:action="@{/estudiante/cursos/retirar/{id}
+                                    (id=${inscripcion.id})}" method="post">
+
+                                <button type="submit" class="btn-retirar">
+                                    Retirarme
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

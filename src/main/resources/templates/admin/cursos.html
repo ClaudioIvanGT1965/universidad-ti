@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Cursos</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal de Administración</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-superior">
+
+            <a th:href="@{/admin}" class="btn-volver">
+                ← Volver al inicio
+            </a>
+
+            <a th:href="@{/admin/cursos/nuevo}" class="btn-nuevo">
+                + Nuevo curso
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Gestión académica
+            </p>
+
+            <h2>Cursos</h2>
+
+            <p>
+                Consulta y administra el catálogo
+                académico de Universidad TI.
+            </p>
+
+        </section>
+
+
+        <div th:if="${mensaje}" class="mensaje-exito" th:text="${mensaje}">
+        </div>
+
+
+        <div th:if="${error}" class="mensaje-error" th:text="${error}">
+        </div>
+
+
+        <div th:if="${#lists.isEmpty(cursos)}" class="sin-datos">
+
+            No existen cursos registrados.
+
+        </div>
+
+
+        <section th:unless="${#lists.isEmpty(cursos)}" class="panel-tabla">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="curso : ${cursos}">
+
+                        <td>
+                            <strong th:text="${curso.codigo}">
+                                JEE-0101
+                            </strong>
+                        </td>
+
+                        <td th:text="${curso.nombre}">
+                            JAVA EE
+                        </td>
+
+                        <td th:text="${curso.descripcion}">
+                            Desarrollo de aplicaciones
+                            empresariales con Java.
+                        </td>
+
+                        <td>
+
+                            <span th:if="${curso.vigente}" class="estado-vigente">
+                                Vigente
+                            </span>
+
+                            <span th:unless="${curso.vigente}" class="estado-inactivo">
+                                No vigente
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <form th:if="${curso.vigente}" th:action="@{/admin/cursos/{id}/baja(id=${curso.id})}"
+                                method="post">
+
+                                <button type="submit" class="btn-baja">
+                                    Dar de baja
+                                </button>
+
+                            </form>
+
+
+                            <span th:unless="${curso.vigente}" class="sin-accion">
+                                Sin acciones
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

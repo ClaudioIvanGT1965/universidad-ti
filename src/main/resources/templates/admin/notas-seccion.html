@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Notas de Sección</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal de Administración</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-superior">
+
+            <a th:href="@{/admin/notas}" class="btn-volver">
+                ← Volver a Gestión de Notas
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Registro académico
+            </p>
+
+            <h2 th:text="|${seccion.curso.codigo} - ${seccion.curso.nombre}|">
+                JEE-0101 - Java Enterprise
+            </h2>
+
+            <p>
+                Período:
+                <strong th:text="${seccion.periodo}">
+                    2026
+                </strong>
+
+                · Módulo:
+                <strong th:text="${seccion.modulo}">
+                    01
+                </strong>
+
+                · Evaluaciones:
+                <strong th:text="${seccion.totalNotas}">
+                    3
+                </strong>
+            </p>
+
+        </section>
+        <div class="resumen-evaluaciones">
+
+            <strong>Evaluaciones registradas:</strong>
+
+            <span th:text="${evaluacionesRegistradas != null
+                            ? #sets.size(evaluacionesRegistradas)
+                            : 0}">
+                0
+            </span>
+
+            de
+
+            <span th:text="${seccion.totalNotas}">
+                3
+            </span>
+
+        </div>
+        <div class="resumen-ponderacion">
+
+            <div>
+                <span>Ponderación utilizada</span>
+
+                <strong th:text="|${ponderacionUtilizada}%|">
+                    60%
+                </strong>
+            </div>
+
+            <div>
+                <span>Ponderación restante</span>
+
+                <strong th:text="|${ponderacionRestante}%|">
+                    40%
+                </strong>
+            </div>
+
+        </div>
+
+        <div th:if="${mensaje}" class="mensaje-exito" th:text="${mensaje}">
+            <div th:if="${mensaje}" class="continuar-evaluacion">
+
+                <p>
+                    Los cambios ya se encuentran reflejados
+                    en la grilla inferior.
+                </p>
+
+                <a th:href="@{/admin/notas/seccion/{id}(id=${seccion.id})}" class="btn-nuevo">
+
+                    Ingresar otra evaluación
+
+                </a>
+
+            </div>
+        </div>
+
+        <div th:if="${error}" class="mensaje-error" th:text="${error}">
+        </div>
+        <section th:if="${!#lists.isEmpty(inscripciones) and mensaje == null}" class="panel-formulario">
+
+            <h3>Registrar nueva evaluación</h3>
+
+            <form th:action="@{/admin/notas/seccion/{id}(id=${seccion.id})}" th:object="${notaLote}" method="post">
+
+
+                <div class="campo">
+
+                    <label for="numeroNota">
+                        Nº de evaluación
+                    </label>
+
+                    <input type="number" id="numeroNota" th:field="*{numeroNota}" min="1" th:max="${seccion.totalNotas}"
+                        required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="titulo">
+                        Título
+                    </label>
+
+                    <input type="text" id="titulo" th:field="*{titulo}" placeholder="Ej: Prueba Unidad 1" required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="fecha">
+                        Fecha
+                    </label>
+
+                    <input type="date" id="fecha" th:field="*{fecha}" required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="ponderacion">
+                        Ponderación (%)
+                    </label>
+
+                    <input type="number" id="ponderacion" th:field="*{ponderacion}" min="1" max="100" required>
+
+                </div>
+
+
+                <h3>Calificaciones</h3>
+
+
+                <div class="panel-tabla">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Estudiante</th>
+                                <th>Nota</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr th:each="inscripcion, estado : ${inscripciones}">
+
+                                <td>
+
+                                    <strong th:text="${inscripcion.estudiante.nombre}">
+                                        SEPULVEDA, JULIAN
+                                    </strong>
+
+                                    <input type="hidden"
+                                        th:field="*{calificaciones[__${estado.index}__].idEstudianteSeccion}">
+
+                                </td>
+
+
+                                <td>
+
+                                    <input type="number" th:field="*{calificaciones[__${estado.index}__].nota}"
+                                        min="1.0" max="7.0" step="0.1" required>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div class="acciones-formulario">
+
+                    <button type="submit" class="btn-guardar">
+                        Guardar evaluación
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <div th:if="${#lists.isEmpty(inscripciones)}" class="sin-datos">
+
+            Esta sección no tiene estudiantes inscritos.
+
+        </div>
+
+
+        <section th:unless="${#lists.isEmpty(inscripciones)}" class="panel-tabla">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Estudiante</th>
+                        <th>Correo electrónico</th>
+                        <th>Notas registradas</th>
+                        <th>Promedio</th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+
+                    <tr th:each="inscripcion : ${inscripciones}">
+
+                        <td>
+                            <strong th:text="${inscripcion.estudiante.nombre}">
+                                SEPULVEDA, JULIAN
+                            </strong>
+                        </td>
+
+                        <td th:text="${inscripcion.estudiante.email}">
+                            correo@ejemplo.cl
+                        </td>
+
+                        <td>
+
+                            <span th:if="${notasPorInscripcion[inscripcion.id].isEmpty()}" class="sin-accion">
+                                Sin notas
+                            </span>
+
+                            <span th:each="nota : ${notasPorInscripcion[inscripcion.id]}" class="nota-registrada">
+
+                                <strong th:text="|N${nota.numeroNota}:|">
+                                    N1:
+                                </strong>
+
+                                <span th:text="${nota.nota}">
+                                    5.5
+                                </span>
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span th:if="${inscripcion.promedio != null
+                                     and inscripcion.promedio > 0}" th:text="${inscripcion.promedio}">
+                                5.8
+                            </span>
+
+                            <span th:unless="${inscripcion.promedio != null
+                                         and inscripcion.promedio > 0}" class="sin-accion">
+                                Pendiente
+                            </span>
+
+                        </td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

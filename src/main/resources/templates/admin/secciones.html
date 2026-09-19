@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Secciones</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal de Administración</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-superior">
+
+            <a th:href="@{/admin}" class="btn-volver">
+                ← Volver al inicio
+            </a>
+
+            <a th:href="@{/admin/secciones/nueva}" class="btn-nuevo">
+                + Nueva sección
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Gestión académica
+            </p>
+
+            <h2>Secciones</h2>
+
+            <p>
+                Consulta y administra las secciones
+                académicas de Universidad TI.
+            </p>
+
+        </section>
+
+
+        <div th:if="${mensaje}" class="mensaje-exito" th:text="${mensaje}">
+        </div>
+
+
+        <div th:if="${error}" class="mensaje-error" th:text="${error}">
+        </div>
+
+
+        <div th:if="${#lists.isEmpty(secciones)}" class="sin-datos">
+
+            No existen secciones registradas.
+
+        </div>
+
+
+        <section th:unless="${#lists.isEmpty(secciones)}" class="panel-tabla">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Curso</th>
+                        <th>Nombre</th>
+                        <th>Período</th>
+                        <th>Módulo</th>
+                        <th>Cupos</th>
+                        <th>Evaluaciones</th>
+                        <th>Inicio</th>
+                        <th>Término</th>
+                        <th>Acción</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr th:each="seccion : ${secciones}">
+
+                        <td>
+                            <strong th:text="${seccion.curso.codigo}">
+                                JEE-0101
+                            </strong>
+                        </td>
+
+                        <td th:text="${seccion.curso.nombre}">
+                            Java Enterprise
+                        </td>
+
+                        <td th:text="${seccion.periodo}">
+                            2026
+                        </td>
+
+                        <td th:text="${seccion.modulo}">
+                            01
+                        </td>
+
+                        <td th:text="${seccion.topeEstudiantes}">
+                            30
+                        </td>
+
+                        <td th:text="${seccion.totalNotas}">
+                            3
+                        </td>
+
+                        <td th:text="${#temporals.format(
+                                    seccion.fechaIni,
+                                    'dd-MM-yyyy')}">
+                            01-03-2026
+                        </td>
+
+                        <td th:text="${#temporals.format(
+                                    seccion.fechaTer,
+                                    'dd-MM-yyyy')}">
+                            30-06-2026
+                        </td>
+
+                        <td>
+
+                            <form th:action="@{/admin/secciones/{id}/eliminar(id=${seccion.id})}" method="post">
+
+                                <button type="submit" class="btn-baja">
+                                    Eliminar
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

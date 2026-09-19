@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Nuevo Estudiante</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal de Administración</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-superior">
+
+            <a th:href="@{/admin/estudiantes}" class="btn-volver">
+                ← Volver a estudiantes
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Gestión académica
+            </p>
+
+            <h2>Nuevo estudiante</h2>
+
+            <p>
+                Registra un nuevo estudiante
+                en Universidad TI.
+            </p>
+
+        </section>
+
+
+        <div th:if="${error}" class="mensaje-error" th:text="${error}">
+        </div>
+
+
+        <section class="panel-formulario">
+
+            <form th:action="@{/admin/estudiantes/nuevo}" th:object="${estudiante}" method="post">
+
+                <div class="campo">
+
+                    <label for="nombre">
+                        Nombre completo
+                    </label>
+
+                    <input type="text" id="nombre" th:field="*{nombre}" placeholder="Ej: GONZALEZ, ANDREA" required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="email">
+                        Correo electrónico
+                    </label>
+
+                    <input type="email" id="email" th:field="*{email}" placeholder="Ej: andrea@gmail.com" required>
+
+                </div>
+
+
+                <div class="informacion-acceso">
+
+                    <strong>Cuenta de acceso</strong>
+
+                    <p>
+                        Al registrar al estudiante se creará
+                        automáticamente su cuenta de acceso.
+                    </p>
+
+                    <p>
+                        Contraseña inicial:
+                        <strong>123456</strong>
+                    </p>
+
+                </div>
+
+
+                <div class="acciones-formulario">
+
+                    <a th:href="@{/admin/estudiantes}" class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn-guardar">
+                        Guardar estudiante
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>

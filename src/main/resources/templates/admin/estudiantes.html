@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Universidad TI - Estudiantes</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div>
+            <h1>Universidad TI</h1>
+            <span>Portal de Administración</span>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn-salir" type="submit">
+                Cerrar sesión
+            </button>
+
+        </form>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <div class="barra-superior">
+
+            <a th:href="@{/admin}" class="btn-volver">
+                ← Volver al inicio
+            </a>
+
+            <a th:href="@{/admin/estudiantes/nuevo}" class="btn-nuevo">
+                + Nuevo estudiante
+            </a>
+
+        </div>
+
+
+        <section class="bienvenida">
+
+            <p class="saludo">
+                Gestión académica
+            </p>
+
+            <h2>Estudiantes</h2>
+
+            <p>
+                Consulta y administra los estudiantes
+                registrados en Universidad TI.
+            </p>
+
+        </section>
+
+
+        <div th:if="${#lists.isEmpty(estudiantes)}" class="sin-datos">
+
+            No existen estudiantes registrados.
+
+        </div>
+
+        <div th:if="${mensaje}" class="mensaje-exito" th:text="${mensaje}">
+        </div>
+
+        <div th:if="${error}" class="mensaje-error" th:text="${error}">
+        </div>
+        <section th:unless="${#lists.isEmpty(estudiantes)}" class="panel-tabla">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo electrónico</th>
+                        <th>Fecha de ingreso</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="estudiante : ${estudiantes}">
+
+                        <td th:text="${estudiante.id}">
+                            1
+                        </td>
+
+                        <td>
+                            <strong th:text="${estudiante.nombre}">
+                                SEPULVEDA, JULIAN
+                            </strong>
+                        </td>
+
+                        <td th:text="${estudiante.email}">
+                            julian@gmail.com
+                        </td>
+
+                        <td th:text="${#temporals.format(
+                                    estudiante.fechaIngreso,
+                                    'dd-MM-yyyy')}">
+                            16-09-2026
+                        </td>
+
+                        <td>
+
+                            <span th:if="${estudiante.vigente}" class="estado-vigente">
+                                Vigente
+                            </span>
+
+                            <span th:unless="${estudiante.vigente}" class="estado-inactivo">
+                                No vigente
+                            </span>
+
+                        </td>
+                        <td>
+
+                            <form th:if="${estudiante.vigente}" th:action="@{/admin/estudiantes/{id}/baja
+                                             (id=${estudiante.id})}" method="post">
+
+                                <button type="submit" class="btn-baja">
+                                    Dar de baja
+                                </button>
+
+                            </form>
+
+
+                            <span th:unless="${estudiante.vigente}" class="sin-accion">
+                                Sin acciones
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Universidad TI · Sistema Académico
+    </footer>
+
+</body>
+
+</html>
