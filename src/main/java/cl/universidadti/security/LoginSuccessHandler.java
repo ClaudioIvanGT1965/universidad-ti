@@ -10,10 +10,22 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Redirige al portal correspondiente después de una autenticación exitosa.
+ */
 @Component
 public class LoginSuccessHandler
         implements AuthenticationSuccessHandler {
 
+    /**
+     * Redirige a administración o al portal del estudiante según el rol.
+     *
+     * @param request solicitud HTTP original
+     * @param response respuesta HTTP donde se establece la redirección
+     * @param authentication identidad autenticada y sus autoridades
+     * @throws IOException si no se puede enviar la redirección
+     * @throws ServletException si falla el procesamiento del servlet
+     */
     @Override
     public void onAuthenticationSuccess(
             HttpServletRequest request,

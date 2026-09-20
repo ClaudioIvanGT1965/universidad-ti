@@ -2,6 +2,9 @@ package cl.universidadti.dto;
 
 import java.math.BigDecimal;
 
+/**
+ * Calificación de un estudiante dentro de un lote de notas.
+ */
 public class CalificacionDTO {
 
     private Long idEstudianteSeccion;

@@ -16,12 +16,21 @@ import cl.universidadti.model.Nota;
 import cl.universidadti.repository.EstudianteSeccionRepository;
 import cl.universidadti.repository.NotaRepository;
 
+/**
+ * Servicio que valida notas y calcula promedios ponderados.
+ */
 @Service
 public class NotaService {
 
     private final NotaRepository notaRepository;
     private final EstudianteSeccionRepository estudianteSeccionRepository;
 
+    /**
+     * Crea el servicio de notas.
+     *
+     * @param notaRepository repositorio de notas
+     * @param estudianteSeccionRepository repositorio de inscripciones
+     */
     public NotaService(
             NotaRepository notaRepository,
             EstudianteSeccionRepository estudianteSeccionRepository) {
@@ -30,6 +39,13 @@ public class NotaService {
         this.estudianteSeccionRepository = estudianteSeccionRepository;
     }
 
+    /**
+     * Valida y registra una nota individual, actualizando el promedio cuando se
+     * completa la cantidad definida para la sección.
+     *
+     * @param nota nota que se desea registrar
+     * @return nota persistida
+     */
     @Transactional
     public Nota registrarNota(Nota nota) {
 
@@ -207,6 +223,12 @@ public class NotaService {
         estudianteSeccionRepository.save(inscripcion);
     }
 
+    /**
+     * Registra una calificación para cada estudiante de una sección.
+     *
+     * @param idSeccion identificador de la sección
+     * @param lote lote de calificaciones
+     */
     @Transactional
     public void registrarNotasSeccion(
             Long idSeccion,

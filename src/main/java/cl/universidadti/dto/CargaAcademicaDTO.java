@@ -2,6 +2,9 @@ package cl.universidadti.dto;
 
 import java.math.BigDecimal;
 
+/**
+ * Vista resumida de una inscripción dentro de la carga académica.
+ */
 public class CargaAcademicaDTO {
 
     private Long idInscripcion;
@@ -14,6 +17,16 @@ public class CargaAcademicaDTO {
     public CargaAcademicaDTO() {
     }
 
+    /**
+     * Crea una vista de carga académica.
+     *
+     * @param idInscripcion identificador de la inscripción
+     * @param codigoCurso código del curso
+     * @param nombreCurso nombre del curso
+     * @param periodo período académico
+     * @param modulo módulo del curso
+     * @param promedio promedio obtenido
+     */
     public CargaAcademicaDTO(
             Long idInscripcion,
             String codigoCurso,

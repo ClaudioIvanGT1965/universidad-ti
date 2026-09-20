@@ -22,6 +22,9 @@ import cl.universidadti.repository.EstudianteSeccionRepository;
 import cl.universidadti.service.EstudianteService;
 import cl.universidadti.service.MiCuentaService;
 
+/**
+ * Controlador REST para administrar estudiantes y su información académica.
+ */
 @RestController
 @RequestMapping("/api/estudiantes")
 public class EstudianteRestController {
@@ -50,12 +53,21 @@ public class EstudianteRestController {
                 = miCuentaService;
     }
 
+    /**
+     * @return todos los estudiantes registrados
+     */
     @GetMapping
     public List<Estudiante> listar() {
 
         return estudianteRepository.findAll();
     }
 
+    /**
+     * Crea un estudiante y su cuenta de acceso.
+     *
+     * @param estudiante datos del estudiante
+     * @return estudiante persistido
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Estudiante crear(
@@ -64,6 +76,9 @@ public class EstudianteRestController {
         return estudianteService.crear(estudiante);
     }
 
+    /**
+     * @param id identificador del estudiante que se desea desactivar
+     */
     @DeleteMapping("/{id}")
     public void eliminar(
             @PathVariable Long id) {
@@ -71,6 +86,10 @@ public class EstudianteRestController {
         estudianteService.eliminarLogicamente(id);
     }
 
+    /**
+     * @param codigoCurso código del curso
+     * @return estudiantes vigentes del curso
+     */
     @GetMapping("/curso/{codigoCurso}")
     public List<Estudiante> estudiantesVigentesPorCurso(
             @PathVariable String codigoCurso) {
@@ -79,6 +98,10 @@ public class EstudianteRestController {
                 .findEstudiantesVigentesPorCurso(codigoCurso);
     }
 
+    /**
+     * @param id identificador del estudiante
+     * @return carga académica del estudiante
+     */
     @GetMapping("/{id}/carga")
     public List<CargaAcademicaDTO> obtenerCargaAcademica(
             @PathVariable Long id) {
@@ -112,6 +135,10 @@ public class EstudianteRestController {
                 .toList();
     }
 
+    /**
+     * @param id identificador del estudiante
+     * @return notas agrupadas por curso
+     */
     @GetMapping("/{id}/notas")
     public List<CursoNotasDTO> obtenerNotasEstudiante(
             @PathVariable Long id) {
@@ -120,6 +147,11 @@ public class EstudianteRestController {
                 .obtenerNotasPorIdEstudiante(id);
     }
 
+    /**
+     * @param id identificador del estudiante
+     * @param estudiante nuevos datos
+     * @return estudiante actualizado
+     */
     @PutMapping("/{id}")
     public Estudiante actualizar(
             @PathVariable Long id,

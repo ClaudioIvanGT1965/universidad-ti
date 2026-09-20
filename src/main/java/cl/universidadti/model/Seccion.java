@@ -12,6 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad que representa una sección de un curso en un período académico.
+ */
 @Entity
 @Table(name = "seccion")
 public class Seccion {

@@ -1,5 +1,8 @@
 package cl.universidadti.dto;
 
+/**
+ * Identificadores necesarios para crear una inscripción.
+ */
 public class InscripcionDTO {
 
     private Long idEstudiante;

@@ -37,6 +37,9 @@ import cl.universidadti.service.MiCuentaService;
 import cl.universidadti.service.NotaService;
 import cl.universidadti.service.SeccionService;
 
+/**
+ * Controlador MVC para las vistas web de estudiantes y administradores.
+ */
 @Controller
 public class WebController {
 
@@ -52,6 +55,21 @@ public class WebController {
     private final NotaService notaService;
     private final NotaRepository notaRepository;
 
+    /**
+     * Crea el controlador web con sus servicios y repositorios.
+     *
+     * @param estudianteRepository repositorio de estudiantes
+     * @param estudianteSeccionRepository repositorio de inscripciones
+     * @param inscripcionService servicio de inscripciones
+     * @param miCuentaService servicio de consultas de cuenta
+     * @param estudianteService servicio de estudiantes
+     * @param cursoRepository repositorio de cursos
+     * @param cursoService servicio de cursos
+     * @param seccionRepository repositorio de secciones
+     * @param seccionService servicio de secciones
+     * @param notaService servicio de notas
+     * @param notaRepository repositorio de notas
+     */
     public WebController(
             EstudianteRepository estudianteRepository,
             EstudianteSeccionRepository estudianteSeccionRepository,

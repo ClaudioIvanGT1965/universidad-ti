@@ -2,6 +2,9 @@ package cl.universidadti.dto;
 
 import java.time.LocalDate;
 
+/**
+ * Sección vigente que puede ser inscrita por un estudiante.
+ */
 public class SeccionDisponibleDTO {
 
     private Long idSeccion;
@@ -16,6 +19,18 @@ public class SeccionDisponibleDTO {
     public SeccionDisponibleDTO() {
     }
 
+    /**
+     * Crea una vista de sección con sus cupos disponibles.
+     *
+     * @param idSeccion identificador de la sección
+     * @param codigoCurso código del curso
+     * @param nombreCurso nombre del curso
+     * @param periodo período académico
+     * @param modulo módulo de la sección
+     * @param cuposDisponibles cantidad de cupos libres
+     * @param fechaIni fecha de inicio
+     * @param fechaTer fecha de término
+     */
     public SeccionDisponibleDTO(
             Long idSeccion,
             String codigoCurso,

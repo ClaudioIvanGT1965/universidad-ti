@@ -3,6 +3,9 @@ package cl.universidadti.dto;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Notas de un curso agrupadas para su presentación al estudiante.
+ */
 public class CursoNotasDTO {
 
     private String codigoCurso;
@@ -15,6 +18,16 @@ public class CursoNotasDTO {
     public CursoNotasDTO() {
     }
 
+    /**
+     * Crea el resumen de notas de un curso.
+     *
+     * @param codigoCurso código del curso
+     * @param nombreCurso nombre del curso
+     * @param periodo período académico
+     * @param modulo módulo del curso
+     * @param promedio promedio del curso
+     * @param notas detalle de calificaciones
+     */
     public CursoNotasDTO(
             String codigoCurso,
             String nombreCurso,

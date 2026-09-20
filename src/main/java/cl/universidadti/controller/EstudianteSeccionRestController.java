@@ -17,6 +17,9 @@ import cl.universidadti.model.EstudianteSeccion;
 import cl.universidadti.repository.EstudianteSeccionRepository;
 import cl.universidadti.service.InscripcionService;
 
+/**
+ * Controlador REST para gestionar inscripciones de estudiantes en secciones.
+ */
 @RestController
 @RequestMapping("/api/inscripciones")
 public class EstudianteSeccionRestController {
@@ -33,11 +36,18 @@ public class EstudianteSeccionRestController {
         this.inscripcionService = inscripcionService;
     }
 
+    /**
+     * @return todas las inscripciones
+     */
     @GetMapping
     public List<EstudianteSeccion> listar() {
         return repository.findAll();
     }
 
+    /**
+     * @param id identificador del estudiante
+     * @return inscripciones del estudiante
+     */
     @GetMapping("/estudiante/{id}")
     public List<EstudianteSeccion> cargaAcademica(
             @PathVariable Long id) {
@@ -45,6 +55,10 @@ public class EstudianteSeccionRestController {
         return repository.findByEstudianteId(id);
     }
 
+    /**
+     * @param id identificador de la sección
+     * @return estudiantes inscritos en la sección
+     */
     @GetMapping("/seccion/{id}")
     public List<EstudianteSeccion> estudiantesPorSeccion(
             @PathVariable Long id) {
@@ -52,6 +66,10 @@ public class EstudianteSeccionRestController {
         return repository.findBySeccionId(id);
     }
 
+    /**
+     * @param dto datos de la inscripción
+     * @return inscripción creada
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public EstudianteSeccion inscribir(
@@ -60,6 +78,9 @@ public class EstudianteSeccionRestController {
         return inscripcionService.inscribir(dto);
     }
 
+    /**
+     * @param id identificador de la inscripción que se desea retirar
+     */
     @DeleteMapping("/{id}")
     public void retirar(
             @PathVariable Long id) {

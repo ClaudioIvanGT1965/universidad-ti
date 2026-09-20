@@ -1,0 +1,75 @@
+use springedu_eval;
+CREATE TABLE estudiante(id BIGINT AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(120) NOT NULL,
+email VARCHAR(160) NOT NULL UNIQUE,
+fechaIngreso DATE,
+vigente BOOLEAN NOT NULL);
+
+CREATE TABLE curso(id BIGINT AUTO_INCREMENT PRIMARY KEY,
+codigo VARCHAR(30) NOT NULL UNIQUE,
+nombre VARCHAR(180) NOT NULL,
+descripcion VARCHAR(2000) NOT NULL,
+vigente BOOLEAN NOT NULL);
+
+CREATE TABLE seccion(id BIGINT AUTO_INCREMENT PRIMARY KEY,
+periodo INT NOT NULL,
+codigoCurso VARCHAR(30) NOT NULL,
+tope_estudiantes INT NOT NULL,
+total_notas INT NOT NULL,
+fechaIni DATE,
+fechaTer DATE,
+modulo varchar(3),
+-- Definición de la Foreign Key
+    CONSTRAINT fk_seccion_curso 
+        FOREIGN KEY (codigoCurso) 
+        REFERENCES curso(codigo)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE);
+
+CREATE TABLE estudiante_seccion(
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+id_estudiante BIGINT NOT NULL,
+id_seccion BIGINT NOT NULL,
+promedio DECIMAL (4,2),
+
+-- Definición de la Foreign Key
+    CONSTRAINT fk_estseccion_seccion 
+        FOREIGN KEY (id_seccion) 
+        REFERENCES seccion(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+-- Definición de la Foreign Key
+    CONSTRAINT fk_estseccion_estudiante 
+        FOREIGN KEY (id_estudiante) 
+        REFERENCES estudiante(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+
+);
+
+
+CREATE TABLE notas(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_estudiante_seccion BIGINT NOT NULL,
+    numeroNota INT NOT NULL,
+    titulo VARCHAR(180) NOT NULL,
+    fecha DATE NOT NULL,
+    nota DECIMAL(4,2) NOT NULL,
+    ponderacion INT NOT NULL,
+
+    CONSTRAINT fk_notas_estseccion
+        FOREIGN KEY (id_estudiante_seccion)
+        REFERENCES estudiante_seccion(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    CONSTRAINT uk_nota_estudiante_seccion
+        UNIQUE (id_estudiante_seccion, numeroNota)
+);
+
+ALTER TABLE estudiante_seccion
+    ADD CONSTRAINT uk_estudiante_seccion
+        UNIQUE (id_estudiante, id_seccion);
+
+

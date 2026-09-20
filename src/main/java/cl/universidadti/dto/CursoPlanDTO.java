@@ -1,5 +1,8 @@
 package cl.universidadti.dto;
 
+/**
+ * Curso vigente expuesto dentro del plan curricular.
+ */
 public class CursoPlanDTO {
 
     private Long id;
@@ -10,6 +13,14 @@ public class CursoPlanDTO {
     public CursoPlanDTO() {
     }
 
+    /**
+     * Crea una vista de curso del plan curricular.
+     *
+     * @param id identificador del curso
+     * @param codigo código del curso
+     * @param nombre nombre del curso
+     * @param descripcion descripción del curso
+     */
     public CursoPlanDTO(
             Long id,
             String codigo,

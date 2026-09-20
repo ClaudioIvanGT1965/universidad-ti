@@ -6,15 +6,29 @@ import org.springframework.transaction.annotation.Transactional;
 import cl.universidadti.model.Curso;
 import cl.universidadti.repository.CursoRepository;
 
-@Service
+/**
+ * Servicio que contiene las reglas de negocio para la gestión de cursos.
+ */ @Service
 public class CursoService {
 
     private final CursoRepository cursoRepository;
 
+    /**
+     * Crea el servicio con el repositorio de cursos requerido.
+     *
+     * @param cursoRepository repositorio de cursos
+     */
     public CursoService(CursoRepository cursoRepository) {
         this.cursoRepository = cursoRepository;
     }
 
+    /**
+     * Valida y persiste un curso nuevo como vigente.
+     *
+     * @param curso curso que se desea registrar
+     * @return curso persistido
+     * @throws IllegalArgumentException si falta ya está registrado
+     */
     @Transactional
     public Curso crear(Curso curso) {
 
@@ -59,6 +73,12 @@ public class CursoService {
         return cursoRepository.save(curso);
     }
 
+    /**
+     * Desactiva un curso sin eliminar su registro de la base de datos.
+     *
+     * @param idCurso identificador del curso que se desea desactivar
+     * @throws IllegalArgumentException si el curso no existe o ya está inactivo
+     */
     @Transactional
     public void eliminarLogicamente(Long idCurso) {
 
@@ -80,6 +100,14 @@ public class CursoService {
         cursoRepository.save(curso);
     }
 
+    /**
+     * Actualiza el nombre y la descripción de un curso.
+     *
+     * @param id identificador del curso que se desea actualizar
+     * @param datos valores editables recibidos
+     * @return curso actualizado
+     * @throws IllegalArgumentException si el c vacío
+     */
     @Transactional
     public Curso actualizar(Long id, Curso datos) {
 

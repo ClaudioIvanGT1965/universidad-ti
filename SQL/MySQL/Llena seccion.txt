@@ -1,0 +1,17 @@
+--poblamiento tabla seccion
+
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'EST-0101', 30, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'EST-0102', 20, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'EST-0103', 20, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'AIA-0101', 40, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'BDR-0101', 30, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'BDR-0102', 30, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'BDR-0103', 20, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'WEB-0101', 35, 5, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'JSW-0101', 40, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'NJS-0101', 30, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'VST-0101', 10, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'PHP-0101', 20, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'JEE-0101', 40, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"01");
+Insert into seccion(periodo,codigoCurso,tope_estudiantes,total_notas,fechaIni,fechaTer,modulo) 	VALUES (2026, 'JEE-0101', 30, 4, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 90 DAY),"02");
+

@@ -7,10 +7,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Configura autenticación, autorización y cierre de sesión de la aplicación.
+ */
 @Configuration
-
 public class SecurityConfig {
 
+    /**
+     * Define las reglas de seguridad para páginas web y API REST.
+     *
+     * @param http constructor de configuración HTTP de Spring Security
+     * @return cadena de filtros configurada
+     * @throws Exception si la configuración HTTP no puede construirse
+     */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
@@ -82,12 +91,20 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * @return codificador BCrypt utilizado para contraseñas
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
     private final LoginSuccessHandler loginSuccessHandler;
 
+    /**
+     * Crea la configuración con el manejador de inicio de sesión.
+     *
+     * @param loginSuccessHandler manejador de autenticación exitosa
+     */
     public SecurityConfig(
             LoginSuccessHandler loginSuccessHandler) {
 

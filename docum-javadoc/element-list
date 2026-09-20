@@ -1,0 +1,10 @@
+cl.universidadti
+cl.universidadti.config
+cl.universidadti.controller
+cl.universidadti.controller.web
+cl.universidadti.dto
+cl.universidadti.exception
+cl.universidadti.model
+cl.universidadti.repository
+cl.universidadti.security
+cl.universidadti.service

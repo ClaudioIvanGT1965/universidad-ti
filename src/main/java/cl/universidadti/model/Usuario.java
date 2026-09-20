@@ -7,6 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad que representa una cuenta autenticable del sistema.
+ */
 @Entity
 @Table(name = "usuario")
 public class Usuario {

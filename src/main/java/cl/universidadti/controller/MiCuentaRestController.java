@@ -20,6 +20,10 @@ import cl.universidadti.repository.EstudianteSeccionRepository;
 import cl.universidadti.service.InscripcionService;
 import cl.universidadti.service.MiCuentaService;
 
+/**
+ * Controlador REST de las operaciones disponibles para el estudiante
+ * autenticado.
+ */
 @RestController
 @RequestMapping("/api/mi-cuenta")
 public class MiCuentaRestController {
@@ -47,6 +51,10 @@ public class MiCuentaRestController {
                 = inscripcionService;
     }
 
+    /**
+     * @param authentication identidad del usuario autenticado
+     * @return datos del estudiante autenticado
+     */
     @GetMapping
     public Estudiante misDatos(Authentication authentication) {
 
@@ -60,6 +68,10 @@ public class MiCuentaRestController {
                         + "al usuario autenticado."));
     }
 
+    /**
+     * @param authentication identidad del usuario autenticado
+     * @return carga académica del estudiante
+     */
     @GetMapping("/carga")
     public List<EstudianteSeccion> miCarga(
             Authentication authentication) {
@@ -79,6 +91,10 @@ public class MiCuentaRestController {
                         estudiante.getId());
     }
 
+    /**
+     * @param authentication identidad del usuario autenticado
+     * @return notas del estudiante
+     */
     @GetMapping("/notas")
     public List<CursoNotasDTO> misNotas(
             Authentication authentication) {
@@ -88,12 +104,19 @@ public class MiCuentaRestController {
         return miCuentaService.obtenerNotas(email);
     }
 
+    /**
+     * @return plan curricular disponible
+     */
     @GetMapping("/plan")
     public List<CursoPlanDTO> miPlanCurricular() {
 
         return miCuentaService.obtenerPlanCurricular();
     }
 
+    /**
+     * @param authentication identidad del usuario autenticado
+     * @return secciones disponibles
+     */
     @GetMapping("/secciones-disponibles")
     public List<SeccionDisponibleDTO>
             seccionesDisponibles(
@@ -106,6 +129,11 @@ public class MiCuentaRestController {
                 .obtenerSeccionesDisponibles(email);
     }
 
+    /**
+     * @param idSeccion identificador de la sección
+     * @param authentication identidad del usuario autenticado
+     * @return inscripción creada
+     */
     @PostMapping("/inscripciones/{idSeccion}")
     public EstudianteSeccion inscribirme(
             @PathVariable Long idSeccion,
@@ -120,6 +148,10 @@ public class MiCuentaRestController {
                         idSeccion);
     }
 
+    /**
+     * @param idInscripcion identificador de la inscripción
+     * @param authentication identidad del usuario autenticado
+     */
     @DeleteMapping("/inscripciones/{idInscripcion}")
     public void retirarme(
             @PathVariable Long idInscripcion,

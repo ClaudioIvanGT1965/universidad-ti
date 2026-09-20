@@ -1,0 +1,15 @@
+--POBLANDO TABLA curso	
+	
+Insert into curso(codigo,nombre,descripcion,vigente) values("EST-0101","ESTRUCTURAS DE DATOS I","Estructuras básicas de datos",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("EST-0102","ESTRUCTURAS DE DATOS II","Estructuras avanzadas de datos",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("EST-0103","ESTRUCTURAS DE DATOS III","Estructuras nucleares de datos",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("AIA-0101","AGENTES DE IA","Introducción a Agentes IA",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("BDR-0101","BASES DE DATOS RELACIONALES I","Introducción a BD relacionales",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("BDR-0102","BASES DE DATOS RELACIONALES II","ORACLE y SQL SERVER",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("BDR-0103","BASES DE DATOS RELACIONALES III","INFORMIX y BBDD libres",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("WEB-0101","HTML Y CSS","PÁGINAS HTML5 Y CSS3",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("JSW-0101","JAVASCRIPT I","JAVASCRIPT para principiantes",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("NJS-0101","NODE JS","NODE JS en el Front-end",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("VST-0101","VISUAL STUDIO CORE","Microsoft Visual Studio Multiplataforma",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("PHP-0101","DESARROLLO EN PHP","PHP para Back-end",1);
+Insert into curso(codigo,nombre,descripcion,vigente) values("JEE-0101","JAVA EE ENTORNO DE DESARROLLO","JEE para desarrollar Web",1);

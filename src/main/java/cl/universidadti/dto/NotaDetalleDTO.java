@@ -3,6 +3,9 @@ package cl.universidadti.dto;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Detalle de una calificación para respuestas de consulta.
+ */
 public class NotaDetalleDTO {
 
     private Integer numeroNota;
@@ -14,6 +17,15 @@ public class NotaDetalleDTO {
     public NotaDetalleDTO() {
     }
 
+    /**
+     * Crea el detalle de una calificación.
+     *
+     * @param numeroNota número correlativo de la nota
+     * @param titulo título de la evaluación
+     * @param fecha fecha de la evaluación
+     * @param nota valor obtenido
+     * @param ponderacion porcentaje de ponderación
+     */
     public NotaDetalleDTO(
             Integer numeroNota,
             String titulo,

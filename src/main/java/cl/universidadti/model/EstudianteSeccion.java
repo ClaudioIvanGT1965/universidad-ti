@@ -12,6 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad que vincula un estudiante con una sección inscrita.
+ */
 @Entity
 @Table(name = "estudiante_seccion")
 public class EstudianteSeccion {

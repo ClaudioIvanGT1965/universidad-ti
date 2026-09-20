@@ -9,6 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad que representa a un estudiante de la universidad.
+ */
 @Entity
 @Table(name = "estudiante")
 public class Estudiante {

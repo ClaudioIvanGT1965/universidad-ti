@@ -13,6 +13,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad que representa una calificación de una inscripción.
+ */
 @Entity
 @Table(name = "notas")
 public class Nota {

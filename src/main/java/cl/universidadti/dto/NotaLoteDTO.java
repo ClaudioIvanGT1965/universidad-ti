@@ -3,6 +3,9 @@ package cl.universidadti.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Datos comunes y calificaciones de un lote de notas de sección.
+ */
 public class NotaLoteDTO {
 
     private Integer numeroNota;

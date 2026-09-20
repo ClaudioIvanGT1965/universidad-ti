@@ -9,15 +9,39 @@ import org.springframework.data.repository.query.Param;
 
 import cl.universidadti.model.Estudiante;
 
+/**
+ * Repositorio de persistencia para estudiantes.
+ */
 public interface EstudianteRepository
         extends JpaRepository<Estudiante, Long> {
 
+    /**
+     * Comprueba si existe un estudiante con el correo indicado.
+     *
+     * @param email correo del estudiante
+     * @return {@code true} si existe un estudiante con ese correo
+     */
     boolean existsByEmail(String email);
 
+    /**
+     * Busca un estudiante por correo.
+     *
+     * @param email correo del estudiante
+     * @return estudiante encontrado, si existe
+     */
     Optional<Estudiante> findByEmail(String email);
 
+    /**
+     * @return estudiantes ordenados alfabéticamente por nombre
+     */
     List<Estudiante> findAllByOrderByNombreAsc();
 
+    /**
+     * Busca estudiantes vigentes inscritos en un curso.
+     *
+     * @param codigoCurso código del curso
+     * @return estudiantes vigentes ordenados por nombre
+     */
     @Query("""
     SELECT DISTINCT e
     FROM Estudiante e

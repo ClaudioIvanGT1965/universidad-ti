@@ -1,0 +1,14 @@
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(6,1,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(6,8,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(6,11,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(6,13,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(7,1,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(7,8,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(7,11,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(7,13,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(3,2,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(3,8,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(3,10,0);
+insert into estudiante_seccion(id_estudiante,id_seccion,promedio) values(3,3,0);
+
+

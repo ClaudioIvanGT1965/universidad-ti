@@ -1,0 +1,10 @@
+--POBLAMIENTO estudiante	
+	
+insert into estudiante(nombre,email,fechaingreso,vigente) values("SEPULVEDA, JULIAN","julian@gmail.com",CURRENT_DATE(),1);
+insert into estudiante(nombre,email,fechaingreso,vigente) values("MORI, BARBARA","bmori@gmail.com",CURRENT_DATE(),1);
+insert into estudiante(nombre,email,fechaingreso,vigente) values("TORRES, ELISEO","eltorres@hotmail.com",CURRENT_DATE(),1);
+insert into estudiante(nombre,email,fechaingreso,vigente) values("SILVA, VIVIANA","vivi2098@gmail.com",CURRENT_DATE(),1);
+insert into estudiante(nombre,email,fechaingreso,vigente) values("ALVAREZ, CARLOS","carlosjj@gmail.com",CURRENT_DATE(),1);
+insert into estudiante(nombre,email,fechaingreso,vigente) values("PEREZ, CAMILA","cami2002@gmail.com",CURRENT_DATE(),1);
+insert into estudiante(nombre,email,fechaingreso,vigente) values("MELINCA, PEDRO","pedro2004@gmail.com",CURRENT_DATE(),1);
+

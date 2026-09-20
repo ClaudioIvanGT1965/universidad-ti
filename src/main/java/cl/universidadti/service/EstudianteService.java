@@ -14,6 +14,9 @@ import cl.universidadti.repository.EstudianteRepository;
 import cl.universidadti.repository.EstudianteSeccionRepository;
 import cl.universidadti.repository.UsuarioRepository;
 
+/**
+ * Servicio que gestiona estudiantes y sus cuentas de acceso.
+ */
 @Service
 public class EstudianteService {
 
@@ -22,6 +25,14 @@ public class EstudianteService {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Crea el servicio de estudiantes.
+     *
+     * @param estudianteRepository repositorio de estudiantes
+     * @param estudianteSeccionRepository repositorio de inscripciones
+     * @param usuarioRepository repositorio de usuarios
+     * @param passwordEncoder codificador de contraseñas
+     */
     public EstudianteService(
             EstudianteRepository estudianteRepository,
             EstudianteSeccionRepository estudianteSeccionRepository,
@@ -36,6 +47,13 @@ public class EstudianteService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Valida y crea un estudiante junto con su cuenta de acceso inicial.
+     *
+     * @param estudiante datos del estudiante
+     * @return estudiante persistido
+     * @throws IllegalArgumentException si faltan datos o ya existe el correo
+     */
     @Transactional
     public Estudiante crear(Estudiante estudiante) {
 
@@ -98,6 +116,12 @@ public class EstudianteService {
         return estudianteGuardado;
     }
 
+    /**
+     * Desactiva al estudiante, su cuenta y sus inscripciones.
+     *
+     * @param idEstudiante identificador del estudiante
+     * @throws IllegalArgumentException si el estudiante o su cuenta no existe
+     */
     @Transactional
     public void eliminarLogicamente(Long idEstudiante) {
 
@@ -143,6 +167,13 @@ public class EstudianteService {
         usuarioRepository.save(usuario);
     }
 
+    /**
+     * Actualiza los datos personales y sincroniza el correo de acceso.
+     *
+     * @param id identificador del estudiante
+     * @param datos nuevos datos del estudiante
+     * @return estudiante actualizado
+     */
     @Transactional
     public Estudiante actualizar(
             Long id,

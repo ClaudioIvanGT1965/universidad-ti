@@ -18,6 +18,9 @@ import cl.universidadti.model.Seccion;
 import cl.universidadti.repository.SeccionRepository;
 import cl.universidadti.service.SeccionService;
 
+/**
+ * Controlador REST para administrar secciones de cursos.
+ */
 @RestController
 @RequestMapping("/api/secciones")
 public class SeccionRestController {
@@ -33,12 +36,21 @@ public class SeccionRestController {
         this.seccionService = seccionService;
     }
 
+    /**
+     * @return todas las secciones registradas
+     */
     @GetMapping
     public List<Seccion> listar() {
 
         return seccionRepository.findAll();
     }
 
+    /**
+     * Crea una sección a partir de sus datos de entrada.
+     *
+     * @param dto datos de la sección
+     * @return sección persistida
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Seccion crear(
@@ -47,18 +59,27 @@ public class SeccionRestController {
         return seccionService.crear(dto);
     }
 
+    /**
+     * @param id identificador de la sección que se desea eliminar
+     */
     @DeleteMapping("/{id}")
     public void eliminar(
             @PathVariable Long id) {
 
         seccionService.eliminar(id);
     }
-    @PutMapping("/{id}")
-public Seccion actualizar(
-        @PathVariable Long id,
-        @RequestBody SeccionDTO seccion) {
 
-    return seccionService
-            .actualizar(id, seccion);
-}
+    /**
+     * @param id identificador de la sección
+     * @param seccion nuevos datos de la sección
+     * @return sección actualizada
+     */
+    @PutMapping("/{id}")
+    public Seccion actualizar(
+            @PathVariable Long id,
+            @RequestBody SeccionDTO seccion) {
+
+        return seccionService
+                .actualizar(id, seccion);
+    }
 }

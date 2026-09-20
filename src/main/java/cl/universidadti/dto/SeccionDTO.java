@@ -2,6 +2,9 @@ package cl.universidadti.dto;
 
 import java.time.LocalDate;
 
+/**
+ * Datos de entrada para crear o actualizar una sección.
+ */
 public class SeccionDTO {
 
     private Integer periodo;

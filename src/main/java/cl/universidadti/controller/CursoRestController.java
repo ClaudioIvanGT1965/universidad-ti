@@ -27,6 +27,12 @@ public class CursoRestController {
     private final CursoRepository cursoRepository;
     private final CursoService cursoService;
 
+    /**
+        * Crea el controlador con sus dependencias de persistencia y negocio.
+        *
+        * @param cursoRepository repositorio utilizado para consultar cursos
+        * @param cursoService servicio que aplica las reglas de negocio de cursos
+     */
     public CursoRestController(
             CursoRepository cursoRepository,
             CursoService cursoService) {
@@ -35,11 +41,22 @@ public class CursoRestController {
         this.cursoService = cursoService;
     }
 
+    /**
+     * Lista todos los cursos almacenados.
+     *
+     * @return cursos registrados
+     */
     @GetMapping
     public List<Curso> listar() {
         return cursoRepository.findAll();
     }
 
+    /**
+     * Crea un curso nuevo y lo marca como vigente mediante el servicio.
+     *
+     * @param curso datos del curso que se desea crear
+     * @return curso persistido
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Curso crear(
@@ -48,6 +65,11 @@ public class CursoRestController {
         return cursoService.crear(curso);
     }
 
+    /**
+     * Realiza la eliminación lógica de un curso.
+     *
+     * @param id identificador del curso
+     */
     @DeleteMapping("/{id}")
     public void eliminar(
             @PathVariable Long id) {
@@ -55,6 +77,13 @@ public class CursoRestController {
         cursoService.eliminarLogicamente(id);
     }
 
+    /**
+     * Actualiza los datos editables de un curso existente.
+     *
+     * @param id identificador del curso
+     * @param curso nuevos datos del curso
+     * @return curso actualizado
+     */
     @PutMapping("/{id}")
     public Curso actualizar(
             @PathVariable Long id,

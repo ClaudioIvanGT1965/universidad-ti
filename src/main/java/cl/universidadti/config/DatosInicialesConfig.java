@@ -11,22 +11,18 @@ import cl.universidadti.repository.EstudianteRepository;
 import cl.universidadti.repository.UsuarioRepository;
 
 /**
- *
- * DatosInicialesConfig
- *
- * @author UniversidadTI
- * @version 1.0
+ * Configura usuarios y cuentas iniciales cuando arranca la aplicación.
  */
 @Configuration
 public class DatosInicialesConfig {
 
     /**
-     * Crea usuarios iniciales para la aplicación
+     * Crea usuarios iniciales para la aplicación.
      *
-     * @param usuarioRepository
-     * @param estudianteRepository
-     * @param passwordEncoder
-     * @return
+     * @param usuarioRepository repositorio de usuarios
+     * @param estudianteRepository repositorio de estudiantes existentes
+     * @param passwordEncoder codificador de contraseñas
+     * @return ejecutor de inicialización de cuentas
      */
     @Bean
     CommandLineRunner crearUsuariosIniciales(
