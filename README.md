@@ -1,15 +1,12 @@
 Universidad TI (proyecto evaluación Módulo 6)
 =============================================
-
-Modelo de Datos:
-
+Modelo de Datos: https://github.com/ClaudioIvanGT1965/universidad-ti/issues/1#issue-5587047171
 
 URL publica pruebas	:  https://universidad-ti-production.up.railway.app/login
 
 Este proyecto llamado UNIVERSIDAD-TI ha sido desarrollado conforme a los conocimientos adquiridos en el Módulo 6 de nuestro bootcamp y 
 siguiendo las instrucciones de la evaluación (SpringEduManager).
-Bauticé el proyecto como UNIVERSIDAD-TI, dado que al instalar las versiones de ayuda en la misma ruta donde instalo todos los proyectos, 
-para no distraerme con los nombres parecidos, le puse un nombre muy diferente. 
+
 Estuve haciendo paralelismos con las versiones de apoyo, por lo mismo que, recogí muchos aspectos de ellas 
 (en especial de la versión senior).
 
@@ -24,6 +21,9 @@ Las credenciales se almacenan en la base de datos, utilizando BCrypt para proteg
 Una vez autenticado, cada usuario es dirigido automáticamente al entorno que le corresponde:
 •	ADMIN: acceso a las funciones de administración académica. 
 •	ESTUDIANTE: acceso a su información personal, académica y operaciones de autoservicio autorizadas. 
+La interfaz de login proporciona un acceso directo a una lista de usuarios de prueba. Un administrador y varios estudiantes sacados de los
+registros de la base de datos. Cabe señalar que como regla de negocio, cada vez que el administrador crea un estudiante, esto genera un
+nuevo usuario del sistema con rol estudiante y la contraseña por defecto "123456".
 
 La aplicación también protege sus servicios REST, diferenciando las operaciones administrativas de aquellas destinadas al estudiante autenticado.
 Reglas de negocio
